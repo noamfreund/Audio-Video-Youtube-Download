@@ -4,7 +4,7 @@ import speech_recognition as sr
 from os import path
 from pydub import AudioSegment
 
-file_name = os.path.basename('./shay')
+file_name = os.path.basename('./male.wav')
 orig_song = os.path.splitext(file_name)[0]+'.ogg'
 dest_song = os.path.splitext(file_name)[0]+'.wav'
 
