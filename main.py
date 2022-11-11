@@ -1,54 +1,154 @@
-import subprocess
-from fileinput import filename
-import os, sys
-import speech_recognition as sr
-from os import path
-from pydub import AudioSegment
+# Importing necessary packages
+import tkinter as tk
+from tkinter import *
 
-file_name = os.path.basename('shoko.ogg')
-dest_song = os.path.splitext(file_name)[0] + '.wav'
+import win32gui
+from pytube import YouTube
+from tkinter import messagebox, filedialog
 
 
-def convert_ogg_to_wav():
+def Widgets():
+    link_label_movie = Label(root,
+                       text="Movie link :",
+                       bg="pale turquoise",
+                       pady=5,
+                       padx=5)
+    link_label_movie.grid(row=2,
+                    column=0,
+                    pady=5,
+                    padx=5)
 
-    orig_song = os.path.splitext(file_name)[0] + '.ogg'
-   # subprocess.call(['ffmpeg', '-i', file_name, dest_song])
-    song = AudioSegment.from_ogg(orig_song)
-    song.export(dest_song, format="wav")
+    link_label_mp3 = Label(root,
+                       text="mp3 link :",
+                       bg="pale turquoise",
+                       pady=5,
+                       padx=5)
+    link_label_mp3.grid(row=3,
+                    column=0,
+                    pady=5,
+                    padx=5)
 
-def convert_mp3_to_wav():
+    root.linkText = Entry(root,
+                          width=30,
+                          textvariable=video_Link,
+                          font="Arial 14")
+    root.linkText.grid(row=2,
+                       column=1,
+                       pady=5,
+                       padx=5,
+                       columnspan=2)
 
-    subprocess.call(['ffmpeg', '-i', file_name,  dest_song])
+    root.linkText = Entry(root,
+                          width=30,
+                          textvariable=mp3_Link,
+                          font="Arial 14")
+    root.linkText.grid(row=3,
+                       column=1,
+                       pady=5,
+                       padx=5,
+                       columnspan=2)
 
-def convert_wav_to_wav():
-    orig_song = os.path.splitext(file_name)[0] + '.wav'
-    song = AudioSegment.from_wav(orig_song)
-    song.export(dest_song, format="wav")
+    destination_label = Label(root,
+                              text="Destination :",
+                              bg="pale turquoise",
+                              pady=5,
+                              padx=9)
+    destination_label.grid(row=4,
+                           column=0,
+                           pady=5,
+                           padx=5)
 
+    root.destinationText = Entry(root,
+                                 width=27,
+                                 textvariable=download_Path,
+                                 font="Arial 12")
+    root.destinationText.grid(row=4,
+                              column=1,
+                              pady=5,
+                              padx=5)
 
-def main():
+    browse_B = Button(root,
+                      text="Browse",
+                      command=Browse,
+                      width=10,
+                      bg="blue",
+                      relief=GROOVE)
+    browse_B.grid(row=4,
+                  column=2,
+                  pady=1,
+                  padx=1)
 
-    if file_name == '*.wav':
-        print("wav")
-        convert_wav_to_wav()
-    elif file_name == '*.ogg':
-        print("ogg")
-        convert_ogg_to_wav()
-    elif file_name == '*.mp3':
-        print("mp3")
-        convert_mp3_to_wav()
+    Download = Button(root,
+                        text="Download ",
+                        command=download,
+                        width=15,
+                        bg="pale turquoise",
+                        pady=0,
+                        padx=0,
+                        relief=GROOVE,
+                        font="Georgia, 13")
+    Download.grid(row=5,
+                    column=0,
+                    pady=1,
+                    padx=1)
+
+    exit_1 = Button(root,
+                    text="Exit",
+                    command=close,
+                    width=5,
+                    bg="pale turquoise",
+                    pady=0,
+                    padx=0,
+                    #relief=GROOVE,
+                    font="Georgia, 13")
+    exit_1.grid(row=5,
+                column=2,
+                pady=1,
+                padx=1)
+
+def close():
+    exit()
+
+def download():
+    if len(video_Link.get()) != 0:
+        MovieDownload()
     else:
-        print("Format of File Unknown")
-        exit()
-    r = sr.Recognizer()
-    # open the file
-    with sr.AudioFile(dest_song) as source:
-        # listen for the data (load audio to memory)
-        audio_data = r.record(source)
-        # recognize (convert from speech to text)
-        text = r.recognize_google(audio_data)
-        print(text)
+        AudioDownload()
 
 
-if __name__ == "__main__":
-    main()
+def Browse():
+    download_Directory = filedialog.askdirectory(
+        initialdir="E:/1-my folders/movies/", title="Save Video")
+
+    download_Path.set(download_Directory)
+
+def MovieDownload():
+    Youtube_link = video_Link.get()
+    download_Folder = download_Path.get()
+    getVideo = YouTube(Youtube_link)
+    videoStream = getVideo.streams.filter()
+    videoStream.get_highest_resolution().download(download_Folder)
+    messagebox.showinfo("SUCCESSFULLY",
+                        "DOWNLOADED AND SAVED IN\n"
+                        + download_Folder)
+
+def AudioDownload():
+    Youtube_link = mp3_Link.get()
+    download_Folder = download_Path.get()
+    getVideo = YouTube(Youtube_link)
+    videoStream = getVideo.streams.filter()
+    videoStream.get_highest_resolution().download(download_Folder)
+    messagebox.showinfo("SUCCESSFULLY",
+                        "DOWNLOADED AND SAVED IN\n"
+                        + download_Folder)
+
+root = tk.Tk()
+root.geometry("520x280")
+root.resizable(False, False)
+root.title("YouTube Video Downloader")
+root.config(background="grey")
+video_Link = StringVar()
+mp3_Link = StringVar()
+download_Path = StringVar()
+Widgets()
+root.mainloop()
