@@ -116,7 +116,7 @@ def download():
         AudioDownload()
 
 
-def Browse():
+def Browse():  # Paste your Destination Folder here
     download_Directory = filedialog.askdirectory(
         initialdir="E:/1-my folders/movies/", title="Save Video")
 
