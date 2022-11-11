@@ -1,32 +1,30 @@
 # Importing necessary packages
 import tkinter as tk
 from tkinter import *
-
-import win32gui
 from pytube import YouTube
 from tkinter import messagebox, filedialog
 
 
 def Widgets():
     link_label_movie = Label(root,
-                       text="Movie link :",
-                       bg="pale turquoise",
-                       pady=5,
-                       padx=5)
+                             text="Movie link :",
+                             bg="pale turquoise",
+                             pady=5,
+                             padx=5)
     link_label_movie.grid(row=2,
-                    column=0,
-                    pady=5,
-                    padx=5)
+                          column=0,
+                          pady=5,
+                          padx=5)
 
     link_label_mp3 = Label(root,
-                       text="mp3 link :",
-                       bg="pale turquoise",
-                       pady=5,
-                       padx=5)
+                           text="mp3 link :",
+                           bg="pale turquoise",
+                           pady=5,
+                           padx=5)
     link_label_mp3.grid(row=3,
-                    column=0,
-                    pady=5,
-                    padx=5)
+                        column=0,
+                        pady=5,
+                        padx=5)
 
     root.linkText = Entry(root,
                           width=30,
@@ -79,18 +77,18 @@ def Widgets():
                   padx=1)
 
     Download = Button(root,
-                        text="Download ",
-                        command=download,
-                        width=15,
-                        bg="pale turquoise",
-                        pady=0,
-                        padx=0,
-                        relief=GROOVE,
-                        font="Georgia, 13")
+                      text="Download ",
+                      command=download,
+                      width=15,
+                      bg="pale turquoise",
+                      pady=0,
+                      padx=0,
+                      relief=GROOVE,
+                      font="Georgia, 13")
     Download.grid(row=5,
-                    column=0,
-                    pady=1,
-                    padx=1)
+                  column=0,
+                  pady=1,
+                  padx=1)
 
     exit_1 = Button(root,
                     text="Exit",
@@ -99,15 +97,17 @@ def Widgets():
                     bg="pale turquoise",
                     pady=0,
                     padx=0,
-                    #relief=GROOVE,
+                    # relief=GROOVE,
                     font="Georgia, 13")
     exit_1.grid(row=5,
                 column=2,
                 pady=1,
                 padx=1)
 
+
 def close():
     exit()
+
 
 def download():
     if len(video_Link.get()) != 0:
@@ -122,6 +122,7 @@ def Browse():
 
     download_Path.set(download_Directory)
 
+
 def MovieDownload():
     Youtube_link = video_Link.get()
     download_Folder = download_Path.get()
@@ -132,6 +133,7 @@ def MovieDownload():
                         "DOWNLOADED AND SAVED IN\n"
                         + download_Folder)
 
+
 def AudioDownload():
     Youtube_link = mp3_Link.get()
     download_Folder = download_Path.get()
@@ -141,6 +143,7 @@ def AudioDownload():
     messagebox.showinfo("SUCCESSFULLY",
                         "DOWNLOADED AND SAVED IN\n"
                         + download_Folder)
+
 
 root = tk.Tk()
 root.geometry("520x280")
