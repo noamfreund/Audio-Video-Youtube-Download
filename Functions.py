@@ -1,21 +1,17 @@
 # Importing necessary packages
 from pytube import YouTube
 from tkinter import messagebox, filedialog
+import tkinter as tk
+from tkinter import *
 
-
-video_Link = ""
-mp3_Link = ""
-download_Path = ""
 
 def close():
     exit()
 
 
 def download():
-    if len(video_Link.get()) != 0:
-        MovieDownload()
-    else:
-        AudioDownload()
+
+    MovieDownload()
 
 
 def Browse():  # Paste your Destination Folder here
@@ -32,8 +28,7 @@ def MovieDownload():
     videoStream = getVideo.streams.filter()
     videoStream.get_highest_resolution().download(download_Folder)
     messagebox.showinfo("SUCCESSFULLY",
-                        "DOWNLOADED AND SAVED IN\n"
-                        + download_Folder)
+                        "DOWNLOADED AND SAVED IN\n" + download_Path)
 
 
 def AudioDownload():

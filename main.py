@@ -1,10 +1,15 @@
 # Importing necessary packages
 import tkinter as tk
 from tkinter import *
+from tkinter import ttk
+from pytube import YouTube
+from tkinter import messagebox, filedialog
+
 from Functions import Browse,download,close
 
 
 def Widgets():
+
     link_label_movie = Label(root,
                              text="Movie link :",
                              bg="pale turquoise",
@@ -110,6 +115,8 @@ root.geometry("520x280")
 root.resizable(False, False)
 root.title("YouTube Video Downloader")
 root.config(background="grey")
+
+
 video_Link = StringVar()
 mp3_Link = StringVar()
 download_Path = StringVar()
