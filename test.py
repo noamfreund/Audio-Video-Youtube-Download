@@ -25,32 +25,23 @@ def Widgets():
     buttonDownload.grid(row=4, column=0, padx=1, pady=40)
 
     # === WIDGETS FOR TAB TWO
-    firstLabelTabTwo = tk.Label(tab2, text="First Name:")
-    familyLabelTabTwo = tk.Label(tab2, text="Family Name:")
-    jobLabelTabTwo = tk.Label(tab2, text="Address:")
+    firstLabelTabTwo_Movie = tk.Label(tab2, text="Audio link :", bg="pale turquoise", pady=5, padx=5)
+    secondLabelTabTwo_Dest = tk.Label(tab2, text="Destination :", bg="pale turquoise", pady=5, padx=9)
+    firstEntryTabTwo_Movie = tk.Entry(tab2, width=30, textvariable=mp3_Link, font="Arial 12")
+    secondEntryTabTwo_Dest = tk.Entry(tab2, width=22, textvariable=download_Path, font="Arial 12")
 
-    firstEntryTabTwo = tk.Entry(tab2)
-    familyEntryTabTwo = tk.Entry(tab2)
-    jobEntryTabTwo = tk.Entry(tab2)
+    buttonBack = tk.Button(tab2, text="Exit", command=close, width=10, bg="grey", font="Georgia, 13")
+    buttonBrowse = tk.Button(tab2, text="Browse", command=Browse, width=10, bg="pale turquoise", font="Georgia, 13")
+    buttonDownload = tk.Button(tab2, text="Download", command=download, width=10, bg="light green", font="Georgia, 13")
 
-    imgLabelTabTwo = tk.Label(tab2)
-
-    buttonCommit = tk.Button(tab2, text="Add Record to Database")
-    buttonAddImage = tk.Button(tab2, text="Add Image")
-
-    # === ADD WIDGETS TO GRID ON TAB TWO
-    firstLabelTabTwo.grid(row=0, column=0, padx=15, pady=15)
-    firstEntryTabTwo.grid(row=0, column=1, padx=15, pady=15)
-    imgLabelTabTwo.grid(row=0, column=2, rowspan=3, padx=15, pady=15)
-
-    familyLabelTabTwo.grid(row=1, column=0, padx=15, pady=15)
-    familyEntryTabTwo.grid(row=1, column=1, padx=15, pady=15)
-
-    jobLabelTabTwo.grid(row=2, column=0, padx=15, pady=15)
-    jobEntryTabTwo.grid(row=2, column=1, padx=15, pady=15)
-
-    buttonCommit.grid(row=4, column=1, padx=15, pady=15)
-    buttonAddImage.grid(row=4, column=2, padx=15, pady=15)
+    # === ADD WIDGETS TO GRID ON TAB ONE
+    firstLabelTabTwo_Movie.grid(row=0, column=0, padx=15, pady=15)
+    firstEntryTabTwo_Movie.grid(row=0, column=1, columnspan=2, sticky="E", padx=15, pady=15)
+    secondLabelTabTwo_Dest.grid(row=3, column=0, padx=5, pady=5)
+    secondEntryTabTwo_Dest.grid(row=3, column=1, padx=5, pady=5)
+    buttonBack.grid(row=4, column=2, padx=1, pady=40)
+    buttonBrowse.grid(row=3, column=2, padx=1, pady=10)
+    buttonDownload.grid(row=4, column=0, padx=1, pady=40)
 
 
 def close():
@@ -95,7 +86,7 @@ def AudioDownload():
 
 form = tk.Tk()
 form.title("Audio/Video-download/convert")
-form.geometry("500x240")
+form.geometry("450x240")
 tab_parent = ttk.Notebook(form)
 tab_parent.pack(expand=1, fill='both')
 
